@@ -1,13 +1,16 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "5.5",
+	"EngineAssociation": "{AC39D2B7-4C98-B8F1-1949-1CB4A450B7B8}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
 		{
 			"Name": "NetworkTest",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
 		}
 	],
 	"Plugins": [

@@ -79,7 +79,8 @@ Saved/*
 !Content/
 Content/*
 !Content/BP/**.uasset
-
+Build/*
+Plugins/*
 
 
 StarterContent/*

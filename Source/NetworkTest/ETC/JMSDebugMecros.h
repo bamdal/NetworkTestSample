@@ -71,3 +71,20 @@ HLOG( Error, TEXT("ASSERTION : %s"), TEXT("'"#Expr"'") ); \
 return __VA_ARGS__; \
 } \
 }
+
+// AActor의 하위클래스에서만 사용 ---------------------------------------------------------------------------------
+
+#define JMSLOG_NETMODE \
+( \
+    (GetNetMode() == ENetMode::NM_Client) ? *FString::Printf(TEXT("CLIENT %d"), UE::GetPlayInEditorID()) : \
+    ( \
+        (GetNetMode() == ENetMode::NM_Standalone) ? TEXT("STANDALONE") : \
+        ( \
+            (GetNetMode() == ENetMode::NM_ListenServer) ? TEXT("LISTEN_SERVER") : TEXT("DEDICATED_SERVER") \
+        ) \
+    ) \
+)
+
+#define JMSLOG_NET_LOG( Verbosity, Format, ... ) \
+    UE_LOG(Headcooler, Verbosity, TEXT("[%s] %s %s"), \
+    JMSLOG_NETMODE, *HLOG_CALLINFO, *FString::Printf(Format, ##__VA_ARGS__) )
