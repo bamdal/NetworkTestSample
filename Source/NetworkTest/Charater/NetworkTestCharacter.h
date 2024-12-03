@@ -33,6 +33,7 @@ protected:
 	// To add mapping context
 	virtual void BeginPlay();
 
+	virtual void Tick(float DeltaTime) override; 
 
 
 

@@ -2,7 +2,7 @@
 
 #include "NetworkTestGameMode.h"
 
-#include "ETC/JMSDebugMecros.h"
+#include "../ETC/JMSDebugMecros.h"
 
 ANetworkTestGameMode::ANetworkTestGameMode()
 {

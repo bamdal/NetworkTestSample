@@ -133,16 +133,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa21501f-4ebe-438f-a028-86a95aa768ea" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.NetworkTest.dir/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.NetworkTest.dir/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NetworkTest.dir/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.NetworkTest/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.NetworkTest/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.NetworkTest/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NetworkTest.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/NetworkTest.uproject" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/JMSDebugMecros.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/NetworkTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/NetworkTest.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/NetworkTestGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/NetworkTestGameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/NetworkTestGameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/NetworkTestGameMode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.NetworkTest.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NetworkTest.dir/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28740,7 +28731,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733106854072</updated>
       <workItem from="1733106856315" duration="2882000" />
-      <workItem from="1733112991180" duration="1588000" />
+      <workItem from="1733112991180" duration="3467000" />
     </task>
     <servers />
   </component>

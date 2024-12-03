@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Kismet/GameplayStatics.h"
+#include "NetworkTest/ETC/JMSDebugMecros.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -41,6 +42,29 @@ void ANetworkTestCharacter::BeginPlay()
 	Super::BeginPlay();
 }
 
+void ANetworkTestCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	const FString LocalRoleString = ROLE_TO_STRING(GetLocalRole());
+	const FString RemoteRoleString = ROLE_TO_STRING(GetRemoteRole());
+
+	const AGameModeBase* GameMode = GetWorld()->GetAuthGameMode();
+	const AGameStateBase* GameState = GetWorld()->GetGameState();
+	const APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	const AHUD* HUD = PlayerController != nullptr ? PlayerController->GetHUD() : nullptr;
+
+	const FString GameModeString = GameMode != nullptr ? TEXT("Valid GameMode") : TEXT("Invalid GameMode");
+	const FString GameStateString = GameState != nullptr ? TEXT("Valid GameState") : TEXT("Invalid GameState");
+	const FString PlayerStateString = GetPlayerState() != nullptr ? TEXT("Valid PlayerState") : TEXT("Invalid PlayerState");
+	const FString PawnName = GetName();
+	const FString PlayerControllerString = PlayerController != nullptr ? TEXT("Valid PlayerController") : TEXT("Invalid PlayerController");
+	const FString HUDString = HUD != nullptr ? TEXT("Valid HUD") : TEXT("Invalid HUD");
+	
+	const FString Values = FString::Printf(TEXT("LocalRole: %s\nRemoteRole = %s\nGameMode = %s\nGameState = %s\nPlayerState = %s\nPawnName = %s\nPlayerController = %s\nHUD = %s\n")
+		, *LocalRoleString, *RemoteRoleString, *GameModeString,*GameStateString,*PlayerStateString,*PawnName, *PlayerControllerString, *HUDString);
+	DrawDebugString(GetWorld(),GetActorLocation(),Values,nullptr,FColor::White,0.0f,true);
+}
 
 
 //////////////////////////////////////////////////////////////////////////
