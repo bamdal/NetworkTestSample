@@ -14,7 +14,7 @@ class NETWORKTEST_API AJMSNetworkBasicController : public APlayerController
 {
 	GENERATED_BODY()
 	
-	
+protected:
 	virtual void BeginPlay() override;
-	
+	virtual void OnPossess(APawn* InPawn) override;
 };

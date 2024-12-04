@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Kismet/GameplayStatics.h"
+#include "Net/UnrealNetwork.h"
 #include "NetworkTest/ETC/JMSDebugMecros.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -35,6 +36,8 @@ ANetworkTestCharacter::ANetworkTestCharacter()
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
 
 }
+
+
 
 void ANetworkTestCharacter::BeginPlay()
 {
@@ -61,11 +64,42 @@ void ANetworkTestCharacter::Tick(float DeltaTime)
 	const FString PlayerControllerString = PlayerController != nullptr ? TEXT("Valid PlayerController") : TEXT("Invalid PlayerController");
 	const FString HUDString = HUD != nullptr ? TEXT("Valid HUD") : TEXT("Invalid HUD");
 	
-	const FString Values = FString::Printf(TEXT("LocalRole: %s\nRemoteRole = %s\nGameMode = %s\nGameState = %s\nPlayerState = %s\nPawnName = %s\nPlayerController = %s\nHUD = %s\n")
+	FString Values = FString::Printf(TEXT("LocalRole: %s\nRemoteRole = %s\nGameMode = %s\nGameState = %s\nPlayerState = %s\nPawnName = %s\nPlayerController = %s\nHUD = %s\n")
 		, *LocalRoleString, *RemoteRoleString, *GameModeString,*GameStateString,*PlayerStateString,*PawnName, *PlayerControllerString, *HUDString);
+
+	if(HasAuthority())
+	{
+		R_Health += 1.0f;
+		RU_Mana++;
+		FString str = FString::Printf(TEXT("[%s] to Add"), *LocalRoleString);
+		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Red, *str);
+	}
+
+	FString Value2 = FString::Printf(TEXT("\n\nHealth : %.2f / Mana = %d"),R_Health, RU_Mana);
+	Values.Append(Value2);
+
+
 	DrawDebugString(GetWorld(),GetActorLocation(),Values,nullptr,FColor::White,0.0f,true);
 }
 
+// 서버가 클라이언트의 RU_Mana를 업데이트 할때마다 호출
+void ANetworkTestCharacter::OnRep_Mana()
+{
+	const FString String = FString::Printf(TEXT("Changed current mana %d"),RU_Mana);
+	GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Blue, *String);
+}
+
+
+void ANetworkTestCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	// 추가 복제 조건없이 다음 매크로를 사용해 리플리케이션
+	DOREPLIFETIME(ANetworkTestCharacter,R_Health);
+
+	// 복제 조건을 명시하여 리플리케이션 (COND_OwnerOnly은 이 액터의 Owner에게만 리플리케이션 하라는 플래그)
+	DOREPLIFETIME_CONDITION(ANetworkTestCharacter,RU_Mana,ELifetimeCondition::COND_OwnerOnly);
+}
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -86,29 +120,36 @@ void ANetworkTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	}
 }
 
+void ANetworkTestCharacter::PossessedBy(AController* NewController)
+{
+	JMSLOG_NET_LOG(Log,TEXT("%s"),TEXT("Begin "));
+	Super::PossessedBy(NewController);
+	JMSLOG_NET_LOG(Log,TEXT("%s"),TEXT("End"));
+}
 
 
-	void ANetworkTestCharacter::OpenLevel()
+
+void ANetworkTestCharacter::OpenLevel()
+{
+	UWorld* World = GetWorld();
+	if (World != nullptr)
 	{
-		UWorld* World = GetWorld();
-		if (World != nullptr)
-		{
-			World->ServerTravel("/Game/Maps/L_Lobby?listen");
-		}
+		World->ServerTravel("/Game/Maps/L_Lobby?listen");
 	}
+}
 
-	// 그냥 씬이동 간소화
-	void ANetworkTestCharacter::CallOpenLevel(const FString& Address)
-	{
-		UGameplayStatics::OpenLevel(this,*Address);
-	}
+// 그냥 씬이동 간소화
+void ANetworkTestCharacter::CallOpenLevel(const FString& Address)
+{
+	UGameplayStatics::OpenLevel(this,*Address);
+}
 
-	void ANetworkTestCharacter::CallClientTravel(const FString& Address)
+void ANetworkTestCharacter::CallClientTravel(const FString& Address)
+{
+	APlayerController* PlayerController = Cast<APlayerController>(GetGameInstance()->GetFirstLocalPlayerController());
+	if(PlayerController)
 	{
-		APlayerController* PlayerController = Cast<APlayerController>(GetGameInstance()->GetFirstLocalPlayerController());
-		if(PlayerController)
-		{
-			PlayerController->ClientTravel(Address,TRAVEL_Absolute);
-		}
+		PlayerController->ClientTravel(Address,TRAVEL_Absolute);
 	}
+}
 

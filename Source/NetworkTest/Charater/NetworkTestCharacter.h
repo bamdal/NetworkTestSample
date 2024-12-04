@@ -25,6 +25,7 @@ public:
 	ANetworkTestCharacter();
 	
 
+	virtual void Tick(float DeltaTime) override; 
 
 protected:
 	// APawn interface
@@ -33,11 +34,13 @@ protected:
 	// To add mapping context
 	virtual void BeginPlay();
 
-	virtual void Tick(float DeltaTime) override; 
 
+	virtual void PossessedBy(AController* NewController) override;
 
 
 public:
+
+	
 	UFUNCTION(BlueprintCallable)
 	void OpenLevel();
 
@@ -46,5 +49,16 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void CallClientTravel(const FString& Address);
+
+protected:
+	// 이 변수가 복제되어 갈것이라 알림
+	UPROPERTY(Replicated)
+	float R_Health = 100.0f;
+
+	UPROPERTY(ReplicatedUsing= OnRep_Mana)
+	int32 RU_Mana;
+
+	UFUNCTION()
+	void OnRep_Mana();
 };
 

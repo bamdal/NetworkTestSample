@@ -12,3 +12,11 @@ void AJMSNetworkBasicController::BeginPlay()
 	Super::BeginPlay();
 	JMSLOG_NET_LOG(Log,TEXT("%s"),TEXT("End"));
 }
+
+void AJMSNetworkBasicController::OnPossess(APawn* InPawn)
+{
+	
+	JMSLOG_NET_LOG(Log,TEXT("%s"),TEXT("Begin "));
+	Super::OnPossess(InPawn);
+	JMSLOG_NET_LOG(Log,TEXT("%s"),TEXT("End"));
+}
