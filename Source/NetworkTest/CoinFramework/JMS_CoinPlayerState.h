@@ -24,6 +24,7 @@ public:
 	void AddPickup()
 	{
 		Pickups++;
+		GEngine->AddOnScreenDebugMessage(-1,1.0f,FColor::Red,FString::Printf(TEXT("%s Pickups: %d"),*GetOwner()->GetName(),Pickups));
 	};
 	
 };
