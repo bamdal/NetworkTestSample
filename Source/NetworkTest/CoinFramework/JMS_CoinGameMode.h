@@ -26,9 +26,13 @@ protected:
 
 	// 상태가 InProgress로 전환될 때 호출됩니다.
 	virtual void HandleMatchHasStarted() override;
-
-
+	
 	// 맵이 WaitingPostMatch로 전환될 때 호출됩니다
 	virtual void HandleMatchHasEnded() override;
+
+	virtual bool ReadyToStartMatch_Implementation() override;
+
+	virtual bool ReadyToEndMatch_Implementation() override;
 	
+	void RestartMap() const;
 };
