@@ -6,6 +6,7 @@
 #include "JMS_CoinPlayerState.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/GameMode.h"
 #include "GameFramework/PlayerState.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/DialogueWave.h"
@@ -41,7 +42,10 @@ void AJMS_CoinCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 	if(EndPlayReason == EEndPlayReason::Destroyed)
 	{
+		// 캐릭터 사라지면 사망소리
 		UGameplayStatics::PlaySound2D(GetWorld(),FallSound);
+		GEngine->AddOnScreenDebugMessage(-1,1.0f,FColor::Black,FString::Printf(TEXT("Character Die play FallSound sound")));
+
 	}
 }
 
@@ -49,6 +53,28 @@ void AJMS_CoinCharacter::Landed(const FHitResult& Hit)
 {
 	Super::Landed(Hit);
 	UGameplayStatics::PlaySound2D(GetWorld(),LandSound);
+	GEngine->AddOnScreenDebugMessage(-1,1.0f,FColor::Black,FString::Printf(TEXT("%s : %s play LandSound sound"),*this->GetName(),*GetOwner()->GetName()));
+
+}
+
+void AJMS_CoinCharacter::FellOutOfWorld(const class UDamageType& dmgType)
+{
+	Super::FellOutOfWorld(dmgType);
+
+	AController* BackupController = Controller;
+	AddScore(-10);
+	Destroy();
+
+	// Pawn은 삭제되었지만 Controller는 게임인스턴스에 남아있는 상태이다
+	// 따로 백업을 해서 해당 Controller에 접근할수있게 해준다
+	// Pawn만 지우면 Controller의 포인터가 날라가므로 여기서 게임모드에 컨트롤러를 날려줌
+	AGameMode* GameMode = GetWorld()->GetAuthGameMode<AGameMode>();
+	if(GameMode)
+	{
+		GameMode->RestartPlayer(BackupController);
+		
+	}
+	
 }
 
 // 기존 점수에 Score를 시키는 함수
@@ -70,5 +96,11 @@ void AJMS_CoinCharacter::AddPickup() const
 	{
 		MyPlayerState->AddPickup();
 	}
+}
+
+void AJMS_CoinCharacter::ClientPlaySound2D(USoundBase* Sound)
+{
+	UGameplayStatics::PlaySound2D(GetWorld(),Sound);
+	GEngine->AddOnScreenDebugMessage(-1,1.0f,FColor::Black,FString::Printf(TEXT("%s : %s play sound"),*this->GetName(),*GetOwner()->GetName()));
 }
 

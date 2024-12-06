@@ -59,6 +59,8 @@ void AJMS_CoinItem::OnBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 		GameState->RemovePickup();
 		
 	}
+
+	Character->ClientPlaySound2D(PickupSound);
 	Character->AddScore(10);
 	Character->AddPickup();
 	

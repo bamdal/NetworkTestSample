@@ -31,7 +31,13 @@ protected:
 
 	virtual void Landed(const FHitResult& Hit) override;
 
+	virtual void FellOutOfWorld(const class UDamageType& dmgType) override;
+
 public:
 	void AddScore(const float Score) const;
 	void AddPickup() const;
+
+	// RPC (Remote Procedure Call)
+	UFUNCTION()
+	void ClientPlaySound2D(USoundBase* Sound);
 };
