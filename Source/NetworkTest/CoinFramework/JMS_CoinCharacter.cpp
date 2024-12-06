@@ -44,16 +44,19 @@ void AJMS_CoinCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	{
 		// 캐릭터 사라지면 사망소리
 		UGameplayStatics::PlaySound2D(GetWorld(),FallSound);
-		GEngine->AddOnScreenDebugMessage(-1,1.0f,FColor::Black,FString::Printf(TEXT("Character Die play FallSound sound")));
+		
+		GEngine->AddOnScreenDebugMessage(-1,3.0f,FColor::Black,FString::Printf(TEXT("Character Die play FallSound sound")));
 
 	}
 }
 
+// 서버는 모든 캐릭터의 Movement를 받아들이고 있다 그러므로 클라이언트들이 점프뛰는 정보를 알기에 클라이언트가 뛰게 되면 본인이 뛰지 않았지만 Landed가 발동하게된다
+// 클라이언트는 본인 Movement외에는 알지 못한다 그러므로 옆에 누군가가 점프를 뛰더라도 Landed는 수행하지 않게 된다.
 void AJMS_CoinCharacter::Landed(const FHitResult& Hit)
 {
 	Super::Landed(Hit);
 	UGameplayStatics::PlaySound2D(GetWorld(),LandSound);
-	GEngine->AddOnScreenDebugMessage(-1,1.0f,FColor::Black,FString::Printf(TEXT("%s : %s play LandSound sound"),*this->GetName(),*GetOwner()->GetName()));
+	GEngine->AddOnScreenDebugMessage(-1,3.0f,FColor::Black,FString::Printf(TEXT("%s : %s play LandSound sound"),*this->GetName(),*GetOwner()->GetName()));
 
 }
 
@@ -62,6 +65,9 @@ void AJMS_CoinCharacter::FellOutOfWorld(const class UDamageType& dmgType)
 	AController* BackupController = Controller;
 
 	AddScore(-10);
+
+	// 서버에서 Destroy()를 호출하게되면 클라이언트에게 모두 삭제되었다고 알리게 된다
+	// 클라이언트는 그 정보를 받게 되면 폰이 해당 폰이 삭제되었음을 알았으므로 각각 EndPlay()수행하게 된다.
 	Destroy();
 
 	// Pawn은 삭제되었지만 Controller는 게임인스턴스에 남아있는 상태이다
