@@ -15,6 +15,12 @@ void AJMS_CoinGameMode::BeginPlay()
 	CoinGameState = GetGameState<AJMS_CoinGameState>();
 }
 
+// 이 함수를 오버라이드 해서 false를 반환 => 플레이어가 리스폰 될때 플레이어 스타트가 여러개일때 랜덤스폰
+bool AJMS_CoinGameMode::ShouldSpawnAtStartSpot(AController* Player)
+{
+	return false;
+}
+
 // 게임이 처음 시작되었을떄
 void AJMS_CoinGameMode::HandleMatchHasStarted()
 {

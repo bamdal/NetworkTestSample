@@ -24,6 +24,8 @@ protected:
 
 	virtual void BeginPlay() override;
 
+	virtual bool ShouldSpawnAtStartSpot(AController* Player);
+
 	// 상태가 InProgress로 전환될 때 호출됩니다.
 	virtual void HandleMatchHasStarted() override;
 	
