@@ -15,6 +15,13 @@ class NETWORKTEST_API AJMS_CoinPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 	
-	
-	
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Score")
+	TSubclassOf<UUserWidget> ScoreboardMenuClass;
+
+	UPROPERTY()
+	class UUserWidget* ScoreboardMenu;
+
+protected:
+	virtual void BeginPlay() override;
 };

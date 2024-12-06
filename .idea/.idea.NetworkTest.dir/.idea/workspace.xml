@@ -133,7 +133,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa21501f-4ebe-438f-a028-86a95aa768ea" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.NetworkTest.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NetworkTest.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/CoinFramework/JMS_CoinCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/CoinFramework/JMS_CoinCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/CoinFramework/JMS_CoinCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/CoinFramework/JMS_CoinCharacter.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28746,6 +28748,8 @@
       <workItem from="1733106856315" duration="2882000" />
       <workItem from="1733112991180" duration="3467000" />
       <workItem from="1733383951229" duration="1000" />
+      <workItem from="1733462692728" duration="5000" />
+      <workItem from="1733462703810" duration="7000" />
     </task>
     <servers />
   </component>

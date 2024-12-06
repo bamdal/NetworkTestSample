@@ -35,9 +35,10 @@ protected:
 
 public:
 	void AddScore(const float Score) const;
+	
 	void AddPickup() const;
-
+	
 	// RPC (Remote Procedure Call)
-	UFUNCTION()
+	UFUNCTION(Client, Unreliable)
 	void ClientPlaySound2D(USoundBase* Sound);
 };

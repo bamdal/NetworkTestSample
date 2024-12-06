@@ -59,9 +59,8 @@ void AJMS_CoinCharacter::Landed(const FHitResult& Hit)
 
 void AJMS_CoinCharacter::FellOutOfWorld(const class UDamageType& dmgType)
 {
-	Super::FellOutOfWorld(dmgType);
-
 	AController* BackupController = Controller;
+
 	AddScore(-10);
 	Destroy();
 
@@ -98,7 +97,7 @@ void AJMS_CoinCharacter::AddPickup() const
 	}
 }
 
-void AJMS_CoinCharacter::ClientPlaySound2D(USoundBase* Sound)
+void AJMS_CoinCharacter::ClientPlaySound2D_Implementation(USoundBase* Sound)
 {
 	UGameplayStatics::PlaySound2D(GetWorld(),Sound);
 	GEngine->AddOnScreenDebugMessage(-1,1.0f,FColor::Black,FString::Printf(TEXT("%s : %s play sound"),*this->GetName(),*GetOwner()->GetName()));
