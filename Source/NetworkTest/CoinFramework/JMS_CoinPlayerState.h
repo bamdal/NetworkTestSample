@@ -26,5 +26,6 @@ public:
 		Pickups++;
 		GEngine->AddOnScreenDebugMessage(-1,3.0f,FColor::Red,FString::Printf(TEXT("%s : %s Pickups: %d"),*this->GetName(),*GetOwner()->GetName(),Pickups));
 	};
-	
+
+	int32 GetPickups() const {return Pickups;};
 };

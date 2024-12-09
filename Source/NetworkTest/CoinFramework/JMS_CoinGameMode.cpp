@@ -8,6 +8,22 @@
 #include "Kismet/GameplayStatics.h"
 #include "NetworkTest/ETC/JMSDebugMecros.h"
 
+AJMS_CoinGameMode::AJMS_CoinGameMode()
+{
+
+	GConfig->GetInt(TEXT("Rule"),TEXT("PickupPoint"),PickupPoint,GGameIni);
+	GConfig->GetInt(TEXT("Rule"),TEXT("FellOutPoint"),FellOutPoint,GGameIni);
+
+	FString configFilePath = FPaths::Combine(FPaths::ProjectConfigDir(),TEXT("DefaultCoinGameRule.ini"));
+	if(FPaths::FileExists(configFilePath))
+	{
+		FConfigFile ConfigFile;
+		ConfigFile.Read(configFilePath);
+		ConfigFile.GetInt(TEXT("Rule"),TEXT("PickupPoint"),PickupPoint);
+		ConfigFile.GetInt(TEXT("Rule"),TEXT("FellOutPoint"),FellOutPoint);
+	}
+}
+
 void AJMS_CoinGameMode::BeginPlay()
 {
 	Super::BeginPlay();

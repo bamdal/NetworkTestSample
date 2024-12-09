@@ -14,6 +14,7 @@ class NETWORKTEST_API AJMS_CoinGameState : public AGameState
 {
 	GENERATED_BODY()
 
+
 protected:
 	//레벨에 남아있는 전체 쾬수
 	UPROPERTY(Replicated,BlueprintReadOnly)
@@ -21,13 +22,15 @@ protected:
 
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable)
-	TArray<APlayerState*> GetPlayerStatesOrderedByScore() const;
+
 	
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 public:
 	void RemovePickup() {PickupsRemaining--;}
     bool HasPickup() const {return PickupsRemaining>0;};
-
+	int32 GetPickupRemaining() const {return PickupsRemaining;}
+	
+	UFUNCTION(BlueprintCallable)
+	TArray<APlayerState*> GetPlayerStatesOrderedByScore() const;
 };

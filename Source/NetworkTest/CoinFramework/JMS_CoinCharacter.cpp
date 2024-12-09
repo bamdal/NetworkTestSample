@@ -3,13 +3,13 @@
 
 #include "JMS_CoinCharacter.h"
 
+#include "JMS_CoinGameMode.h"
 #include "JMS_CoinPlayerState.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/GameMode.h"
 #include "GameFramework/PlayerState.h"
 #include "Kismet/GameplayStatics.h"
-#include "Sound/DialogueWave.h"
 
 
 AJMS_CoinCharacter::AJMS_CoinCharacter()
@@ -64,7 +64,8 @@ void AJMS_CoinCharacter::FellOutOfWorld(const class UDamageType& dmgType)
 {
 	AController* BackupController = Controller;
 
-	AddScore(-10);
+	AJMS_CoinGameMode* GameMode = GetWorld()->GetAuthGameMode<AJMS_CoinGameMode>();
+	AddScore(GameMode->FellOutPoint);
 
 	// 서버에서 Destroy()를 호출하게되면 클라이언트에게 모두 삭제되었다고 알리게 된다
 	// 클라이언트는 그 정보를 받게 되면 폰이 해당 폰이 삭제되었음을 알았으므로 각각 EndPlay()수행하게 된다.
@@ -73,10 +74,12 @@ void AJMS_CoinCharacter::FellOutOfWorld(const class UDamageType& dmgType)
 	// Pawn은 삭제되었지만 Controller는 게임인스턴스에 남아있는 상태이다
 	// 따로 백업을 해서 해당 Controller에 접근할수있게 해준다
 	// Pawn만 지우면 Controller의 포인터가 날라가므로 여기서 게임모드에 컨트롤러를 날려줌
-	AGameMode* GameMode = GetWorld()->GetAuthGameMode<AGameMode>();
-	if(GameMode)
+	AGameMode* GameMode2 = GetWorld()->GetAuthGameMode<AGameMode>();
+	if(GameMode2)
 	{
-		GameMode->RestartPlayer(BackupController);
+
+
+		GameMode2->RestartPlayer(BackupController);
 		
 	}
 	

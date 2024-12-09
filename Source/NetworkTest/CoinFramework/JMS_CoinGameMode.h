@@ -11,17 +11,26 @@ class AJMS_CoinGameState;
 /**
  * 
  */
-UCLASS()
+//UCLASS(config = CoinGameRule)
+UCLASS(config = Game)
 class NETWORKTEST_API AJMS_CoinGameMode : public AGameMode
 {
 	GENERATED_BODY()
 
+	AJMS_CoinGameMode();
 
 protected:
 	UPROPERTY()
 	AJMS_CoinGameState* CoinGameState;
 
+public:
+	UPROPERTY(Config)
+	int32 PickupPoint;
 
+	UPROPERTY(Config)
+	int32 FellOutPoint;
+
+protected:
 	virtual void BeginPlay() override;
 
 	virtual bool ShouldSpawnAtStartSpot(AController* Player);

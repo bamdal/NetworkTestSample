@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/RotatingMovementComponent.h"
 #include "NetworkTest/CoinFramework/JMS_CoinCharacter.h"
+#include "NetworkTest/CoinFramework/JMS_CoinGameMode.h"
 #include "NetworkTest/CoinFramework/JMS_CoinGameState.h"
 
 
@@ -43,10 +44,16 @@ void AJMS_CoinItem::BeginPlay()
 void AJMS_CoinItem::OnBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* Other, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
 	bool bFromSweep, const FHitResult& SweepResult)
 {
+
+	if(!HasAuthority())
+	{
+		return;
+	}
+	
 	AJMS_CoinCharacter* Character = Cast<AJMS_CoinCharacter>(Other);
 
 	
-	if(Character == nullptr || !HasAuthority())
+	if(Character == nullptr)
 	{
 
 		return;
@@ -59,9 +66,15 @@ void AJMS_CoinItem::OnBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 		GameState->RemovePickup();
 		
 	}
+	AJMS_CoinGameMode* GameMode = Cast<AJMS_CoinGameMode>(GetWorld()->GetAuthGameMode());
+	if(GameMode == nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(-1,5.0,FColor::Red,TEXT("NullGameMode"));
+		return;
+	}
 
 	Character->ClientPlaySound2D(PickupSound);
-	Character->AddScore(10);
+	Character->AddScore(GameMode->PickupPoint);
 	Character->AddPickup();
 	
 	Destroy();
