@@ -133,14 +133,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa21501f-4ebe-438f-a028-86a95aa768ea" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.NetworkTest.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NetworkTest.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NetworkTest.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/NetworkTest.uproject" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/Coin/JMS_CoinItem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/Coin/JMS_CoinItem.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/CoinFramework/JMS_CoinCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/CoinFramework/JMS_CoinCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/CoinFramework/JMS_CoinGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/CoinFramework/JMS_CoinGameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/CoinFramework/JMS_CoinGameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/CoinFramework/JMS_CoinGameMode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/Network/JMSNetworkBasicController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/Network/JMSNetworkBasicController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/Network/JMSNetworkBasicController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/Network/JMSNetworkBasicController.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28744,6 +28738,7 @@
       <workItem from="1733462703810" duration="7000" />
       <workItem from="1733708371306" duration="6000" />
       <workItem from="1733709455129" duration="1000" />
+      <workItem from="1733732425988" duration="2000" />
     </task>
     <servers />
   </component>

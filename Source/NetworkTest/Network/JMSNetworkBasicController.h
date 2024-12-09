@@ -17,4 +17,7 @@ class NETWORKTEST_API AJMSNetworkBasicController : public APlayerController
 protected:
 	virtual void BeginPlay() override;
 	virtual void OnPossess(APawn* InPawn) override;
+
+	virtual void PostInitializeComponents() override;
+	virtual void PostNetInit() override;
 };
