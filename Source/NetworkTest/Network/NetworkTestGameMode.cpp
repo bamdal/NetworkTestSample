@@ -17,7 +17,7 @@ void ANetworkTestGameMode::PreLogin(const FString& Options, const FString& Addre
 	UNetDriver* NetDriver = GetNetDriver();
 	if (NetDriver)
 	{
-		if (NetDriver->ClientConnections.Num() >= 2)
+		if (NetDriver->ClientConnections.Num() >= 4)
 		{
 			ErrorMessage = TEXT("Server is Full");
 		}

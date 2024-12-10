@@ -16,7 +16,15 @@ class NETWORKTEST_API AJMS_CoinCharacter : public AJMSCharBase
 	
 public:
 	AJMS_CoinCharacter();
+	virtual void PostInitializeComponents() override;
 
+private:
+	UPROPERTY(VisibleAnywhere)
+	class UJMS_ItemBuffComponent* ItemBuff;
+
+public:
+	FORCEINLINE UJMS_ItemBuffComponent* GetItemBuff() const {return ItemBuff;};
+	
 protected:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Pickups Cahracter")
 	USoundBase* FallSound;

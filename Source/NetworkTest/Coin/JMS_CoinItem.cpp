@@ -9,6 +9,7 @@
 #include "NetworkTest/CoinFramework/JMS_CoinCharacter.h"
 #include "NetworkTest/CoinFramework/JMS_CoinGameMode.h"
 #include "NetworkTest/CoinFramework/JMS_CoinGameState.h"
+#include "NetworkTest/Component/JMS_ItemBuffComponent.h"
 
 
 // Sets default values
@@ -35,8 +36,12 @@ AJMS_CoinItem::AJMS_CoinItem()
 void AJMS_CoinItem::BeginPlay()
 {
 	Super::BeginPlay();
-
-	Mesh->OnComponentBeginOverlap.AddDynamic(this,&AJMS_CoinItem::OnBeginOverlap);
+	
+	if(HasAuthority())
+	{
+		Mesh->OnComponentBeginOverlap.AddDynamic(this,&AJMS_CoinItem::OnBeginOverlap);
+		
+	}
 }
 
 
@@ -45,10 +50,7 @@ void AJMS_CoinItem::OnBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 	bool bFromSweep, const FHitResult& SweepResult)
 {
 
-	if(!HasAuthority())
-	{
-		return;
-	}
+
 	
 	AJMS_CoinCharacter* Character = Cast<AJMS_CoinCharacter>(Other);
 
@@ -76,6 +78,14 @@ void AJMS_CoinItem::OnBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 	Character->ClientPlaySound2D(PickupSound);
 	Character->AddScore(GameMode->PickupPoint);
 	Character->AddPickup();
+	if(ItemTypeSpeed)
+	{
+		UJMS_ItemBuffComponent* ItemBuff = Character->GetItemBuff();
+		if(ItemBuff != nullptr)
+		{
+			ItemBuff->SpeedBuffServerProc(BaseSpeedBuff,SpeedBuffTime);
+		}
+	}
 	
 	Destroy();
 

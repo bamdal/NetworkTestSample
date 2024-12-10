@@ -20,33 +20,35 @@ class ANetworkTestCharacter : public AJMSCharBase
 {
 	GENERATED_BODY()
 
+private:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess=true))
+	UInputAction* CommandAction;
 
 public:
 	ANetworkTestCharacter();
-	
 
-	virtual void Tick(float DeltaTime) override; 
+
+	virtual void Tick(float DeltaTime) override;
 
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
+
+	void RPCCommand(const FInputActionValue& InputActionValue);
+
 	// To add mapping context
 	virtual void BeginPlay();
 
 
 	virtual void PossessedBy(AController* NewController) override;
 
-
 public:
-
-	
 	UFUNCTION(BlueprintCallable)
 	void OpenLevel();
 
 	UFUNCTION(BlueprintCallable)
-	void  CallOpenLevel(const FString& Address);
-	
+	void CallOpenLevel(const FString& Address);
+
 	UFUNCTION(BlueprintCallable)
 	void CallClientTravel(const FString& Address);
 
@@ -60,5 +62,15 @@ protected:
 
 	UFUNCTION()
 	void OnRep_Mana();
-};
 
+	//RPC Command
+public:
+	UFUNCTION(Server,WithValidation, Reliable)
+	void ServerMsgTest(int32 Value);
+	
+	UFUNCTION(Client,WithValidation, Reliable)
+	void ClientMsgTest(int32 Value);
+
+	UFUNCTION(NetMulticast,WithValidation, Reliable)
+	void ClientAllMsgTest(int32 Value);
+};

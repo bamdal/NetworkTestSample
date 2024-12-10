@@ -10,6 +10,7 @@
 #include "GameFramework/GameMode.h"
 #include "GameFramework/PlayerState.h"
 #include "Kismet/GameplayStatics.h"
+#include "NetworkTest/Component/JMS_ItemBuffComponent.h"
 
 
 AJMS_CoinCharacter::AJMS_CoinCharacter()
@@ -27,6 +28,20 @@ AJMS_CoinCharacter::AJMS_CoinCharacter()
 	GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
+
+	// ItemBuffComponent 생성과 리플리케이트 true 설정(복제가능)
+	ItemBuff = CreateDefaultSubobject<UJMS_ItemBuffComponent>(TEXT("ItemBuff"));
+	ItemBuff->SetIsReplicated(true);
+}
+
+void AJMS_CoinCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	if(ItemBuff)
+	{
+		ItemBuff->CoinGameCharacter = this;
+		ItemBuff->SetInitialSpeed(GetCharacterMovement()->MaxWalkSpeed);
+	}
 }
 
 void AJMS_CoinCharacter::BeginPlay()

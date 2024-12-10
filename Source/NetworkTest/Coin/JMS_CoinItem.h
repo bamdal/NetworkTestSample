@@ -26,6 +26,16 @@ protected:
 	// 아이템 획득 사운드
 	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite,Category="Item")
 	USoundBase* PickupSound;
+
+private:
+	UPROPERTY(EditAnywhere,Category="Item")
+	bool ItemTypeSpeed = false;
+	
+	UPROPERTY(EditAnywhere)
+	float BaseSpeedBuff = 1000.0f;
+
+	UPROPERTY(EditAnywhere)
+	float SpeedBuffTime = 2.0f;
 public:	
 	// Sets default values for this actor's properties
 	AJMS_CoinItem();
