@@ -88,7 +88,8 @@ return __VA_ARGS__; \
 #define JMSLOG_LOCALROLE *(UEnum::GetValueAsString(TEXT("Engine.ENetRole"), GetLocalRole()))
 #define JMSLOG_REMOTEROLE *(UEnum::GetValueAsString(TEXT("Engine.ENetRole"), GetRemoteRole()))
 
-#define ROLE_TO_STRING(Value) FindObject<UEnum>(ANY_PACKAGE, TEXT("ENetRole"), true)->GetNameStringByIndex(static_cast<int32>(Value))
+#define ROLE_TO_STRING(Value) FindObject<UEnum>(nullptr, TEXT("/Script/Engine.ENetRole"))->GetNameStringByIndex(static_cast<int32>(Value))
+
 
 #define JMSLOG_NET_LOG( Verbosity, Format, ... ) \
     UE_LOG(Headcooler, Verbosity, TEXT("[%s][%s/%s] %s %s"), \

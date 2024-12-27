@@ -50,6 +50,7 @@ void ANetworkTestCharacter::Tick(float DeltaTime)
 	const FString LocalRoleString = ROLE_TO_STRING(GetLocalRole());
 	const FString RemoteRoleString = ROLE_TO_STRING(GetRemoteRole());
 
+	
 	const AGameModeBase* GameMode = GetWorld()->GetAuthGameMode();
 	const AGameStateBase* GameState = GetWorld()->GetGameState();
 	const APlayerController* PlayerController = Cast<APlayerController>(GetController());
