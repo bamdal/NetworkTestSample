@@ -137,10 +137,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NetworkTest.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NetworkTest.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NetworkTest.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/NetworkTest.uproject" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/Charater/NetworkTestCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/Charater/NetworkTestCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/Component/JMS_ItemBuffComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/Component/JMS_ItemBuffComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/NetworkTest/ETC/JMSDebugMecros.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/NetworkTest/ETC/JMSDebugMecros.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +181,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "Uproject.NetworkTest.executor": "Debug",
+    "Uproject.NetworkTest.executor": "Run",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
@@ -193,7 +189,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "advanced.settings",
+    "settings.editor.selected.configurable": "File.Encoding",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -28882,6 +28878,8 @@
       <updated>1735177164488</updated>
       <workItem from="1735177165987" duration="7699000" />
       <workItem from="1735192987738" duration="2287000" />
+      <workItem from="1735259391126" duration="488000" />
+      <workItem from="1735259894774" duration="8039000" />
     </task>
     <servers />
   </component>
@@ -28891,5 +28889,9 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
