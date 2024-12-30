@@ -82,7 +82,7 @@ void AJMS_ShootingCharacter::OnHealthUpdate()
 		{
 			FString DeathMessage = FString::Printf(TEXT("YOU DIED"));
 				// 서버에 요청
-				StartCutting();
+			ServerHandleCutting();
 
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red,DeathMessage);
 		}
@@ -210,12 +210,33 @@ void AJMS_ShootingCharacter::AttachMeshToBone(UProceduralMeshComponent* MeshPart
 
 	MeshPart->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepWorldTransform, BoneName);
 }
+
+void AJMS_ShootingCharacter::ServerHandleCutting_Implementation()
+{
+	StartCutting();
+	if (HasAuthority())
+	{
+		StartCutting_Implementation();
+	}
+}
+
 void AJMS_ShootingCharacter::StartCutting_Implementation()
 {
 	ApplySliceEffect(CutBoneName);
 }
 void AJMS_ShootingCharacter::ApplySliceEffect(const FName& BoneName)
 {
+
+	if (IsLocallyControlled())
+	{
+		GetInstigatorController()->UnPossess();
+	}
+	if (GetMesh())
+	{
+		GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		GetMesh()->SetCollisionProfileName(TEXT("Ragdoll")); // 필요에 따라 충돌 프로필 설정
+	}
+	
 	// 1. 본 트랜스폼 가져오기
 	FTransform BoneTransform = GetMesh()->GetBoneTransform(BoneName);
 

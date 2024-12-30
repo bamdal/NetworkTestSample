@@ -99,6 +99,9 @@ public:
 	UFUNCTION(Server,Reliable)
 	void HandleFire();
 
+	UFUNCTION(Server,Reliable)
+	void ServerHandleCutting();
+	
 	UFUNCTION(NetMulticast,Reliable)
 	void StartCutting();
 
